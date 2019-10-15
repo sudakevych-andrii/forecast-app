@@ -1,13 +1,18 @@
 import requests
+from telegram_config import config
+from forecast import Forecast
 
 
-class ForecastBot:
-    def __init__(self):
-        self.token = "843960086:AAE_5xQIej-qzgqQ6EkPhbe-DhYjg8HRp1U"
+class TelegramMessageSender:
+    def __init__(self, token, channel_id):
+        self.channel_id = "@" + channel_id
+        self.token = token
         self.url = "https://api.telegram.org/bot" + self.token
-        self.channel_id = "@forecastkharkivtest"
         self.method = self.url + "/sendMessage"
 
-    def send_forecast(self, text):
-        requests.post(self.method, data={"chat_id": self.channel_id, "text": text})
-
+    def send_message(self, text):
+        if type(text) == str and len(text):
+            try:
+                requests.post(self.method, data={"chat_id": self.channel_id, "text": text})
+            except requests.RequestException as e:
+                print("Exception (send forecast):", e)

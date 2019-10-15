@@ -13,7 +13,7 @@ class Forecast:
                 "http://api.openweathermap.org/data/2.5/weather",
                 params={'q': self.city, 'units': 'metric', 'lang': 'en', 'APPID': self.app_id}
             )
-        except Exception as e:
+        except requests.RequestException as e:
             print("Exception (weather):", e)
 
     def display_forecast(self):
@@ -22,4 +22,3 @@ class Forecast:
                f"Time: {datetime.today().strftime('%H:%M:%S %d-%m-%Y')}\n" \
                f"Conditions: {data['weather'][0]['description']}\n" \
                f"Temp: {data['main']['temp']}"
-
