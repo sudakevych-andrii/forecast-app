@@ -16,3 +16,4 @@ class TelegramMessageSender:
                 requests.post(self.method, data={"chat_id": self.channel_id, "text": text})
             except requests.RequestException as e:
                 print("Exception (send forecast):", e)
+
