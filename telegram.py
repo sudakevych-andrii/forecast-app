@@ -1,6 +1,4 @@
 import requests
-from telegram_config import config
-from forecast import WeatherForecast
 
 
 class TelegramMessageSender:
